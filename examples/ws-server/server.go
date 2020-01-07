@@ -6,13 +6,14 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/buaazp/fasthttprouter"
-	"github.com/dgrr/fastws"
+	"github.com/fasthttp/router"
 	"github.com/valyala/fasthttp"
+
+	"github.com/fasthttp/fastws"
 )
 
 func main() {
-	router := fasthttprouter.New()
+	router := router.New()
 	router.GET("/", rootHandler)
 	router.GET("/ws", fastws.Upgrade(wsHandler))
 

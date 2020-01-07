@@ -8,10 +8,21 @@ import (
 )
 
 // Upgrade returns a RequestHandler for fasthttp resuming upgrading process.
-func Upgrade(handler RequestHandler) fasthttp.RequestHandler {
+func Upgrade(handler RequestHandler) func(ctx *fasthttp.RequestCtx) {
 	upgr := Upgrader{
 		Handler:  handler,
 		Compress: true,
+		Mode:     ModeText,
+	}
+	return upgr.Upgrade
+}
+
+// UpgradeMode returns a RequestHandler for fasthttp resuming upgrading process.
+func UpgradeMode(handler RequestHandler, mode Mode) func(ctx *fasthttp.RequestCtx) {
+	upgr := Upgrader{
+		Handler:  handler,
+		Compress: true,
+		Mode:     mode,
 	}
 	return upgr.Upgrade
 }

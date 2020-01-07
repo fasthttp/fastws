@@ -38,6 +38,8 @@ type Upgrader struct {
 
 	// Compress ...
 	Compress bool
+
+	Mode Mode
 }
 
 func prepareOrigin(b []byte, uri *fasthttp.URI) []byte {
@@ -131,6 +133,7 @@ func (upgr *Upgrader) Upgrade(ctx *fasthttp.RequestCtx) {
 				// stablishing default options
 				conn.server = true
 				conn.compress = compress
+				conn.Mode = upgr.Mode
 				// executing handler
 				upgr.Handler(conn)
 				// closes and release the connection

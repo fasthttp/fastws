@@ -4,8 +4,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/dgrr/fastws"
 	"github.com/valyala/fasthttp"
+
+	"github.com/fasthttp/fastws"
 )
 
 func main() {
